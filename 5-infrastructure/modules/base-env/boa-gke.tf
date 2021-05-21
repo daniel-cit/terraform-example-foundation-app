@@ -127,8 +127,8 @@ module "clusters" {
       enable_secure_boot = true,
       image_type         = "COS_CONTAINERD",
       machine_type       = each.value.machine_type,
-      max_count          = 3,
-      min_count          = 1,
+      max_count          = 4,
+      min_count          = 2,
       node_metadata      = "GKE_METADATA_SERVER"
     }
   ]

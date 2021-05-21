@@ -64,13 +64,13 @@ variable "boa_sql_project_id" {
 variable "gke_cluster_1_cidr_block" {
   type        = string
   description = "The primary IPv4 cidr block for the first GKE cluster."
-  default     = "100.64.206.0/28"
+  default     = "100.65.162.0/28"
 }
 
 variable "gke_cluster_2_cidr_block" {
   type        = string
   description = "The primary IPv4 cidr block for the second GKE cluster."
-  default     = "100.65.198.0/28"
+  default     = "100.66.162.0/28"
 }
 
 variable "gke_mci_cluster_cidr_block" {

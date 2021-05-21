@@ -27,8 +27,8 @@ module "env" {
   boa_ops_project_id           = var.boa_ops_project_id
   boa_sec_project_id           = var.boa_sec_project_id
   boa_sql_project_id           = var.boa_sql_project_id
-  gke_cluster_1_cidr_block     = "100.64.206.0/28" # Cluster control plane same is defined in 3-networks/envs/production/boa_vpc_fw.tf
-  gke_cluster_2_cidr_block     = "100.65.198.0/28" # Cluster control plane same is defined in 3-networks/envs/production/boa_vpc_fw.tf
+  gke_cluster_1_cidr_block     = "100.65.162.0/28" # Cluster control plane same is defined in 3-networks/envs/production/boa_vpc_fw.tf
+  gke_cluster_2_cidr_block     = "100.66.162.0/28" # Cluster control plane same is defined in 3-networks/envs/production/boa_vpc_fw.tf
   gke_mci_cluster_cidr_block   = "100.64.198.0/28" # Cluster control plane same is defined in 3-networks/envs/production/boa_vpc_fw.tf
   bastion_members              = []                # Add your GCP Cloud Identity to be added as a whitelisted member on the bastion host
   enforce_bin_auth_policy      = var.enforce_bin_auth_policy

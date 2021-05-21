@@ -53,7 +53,7 @@ module "base_shared_vpc" {
     },
     {
       subnet_name           = "gke-cluster1-subnet"
-      subnet_ip             = "10.0.129.0/29"
+      subnet_ip             = "10.0.129.0/27"
       subnet_region         = var.default_region1
       subnet_private_access = "true"
       subnet_flow_logs      = var.subnetworks_enable_logging
@@ -69,7 +69,7 @@ module "base_shared_vpc" {
     },
     {
       subnet_name           = "gke-cluster2-subnet"
-      subnet_ip             = "10.1.128.0/29"
+      subnet_ip             = "10.1.128.0/27"
       subnet_region         = var.default_region2
       subnet_private_access = "true"
       subnet_flow_logs      = var.subnetworks_enable_logging
@@ -92,11 +92,11 @@ module "base_shared_vpc" {
     gke-cluster1-subnet = [
       {
         range_name    = "pod-ip-range"
-        ip_cidr_range = "100.64.136.0/22"
+        ip_cidr_range = "100.65.64.0/19"
       },
       {
         range_name    = "services-ip-range"
-        ip_cidr_range = "100.64.140.0/26"
+        ip_cidr_range = "100.65.96.0/23"
       }
     ]
 
@@ -105,11 +105,11 @@ module "base_shared_vpc" {
     gke-cluster2-subnet = [
       {
         range_name    = "pod-ip-range"
-        ip_cidr_range = "100.65.128.0/22"
+        ip_cidr_range = "100.66.64.0/19"
       },
       {
         range_name    = "services-ip-range"
-        ip_cidr_range = "100.65.132.0/26"
+        ip_cidr_range = "100.66.96.0/23"
       }
     ]
   }
@@ -128,9 +128,9 @@ module "boa_firewall_rules" {
   network_link                 = module.base_shared_vpc.network_self_link
   fw_project_id                = local.base_project_id
   firewall_enable_logging      = var.firewall_enable_logging
-  boa_gke_cluster1_master_cidr = "100.64.142.0/28"
-  boa_gke_cluster2_master_cidr = "100.65.134.0/28"
+  boa_gke_cluster1_master_cidr = "100.65.98.0/28"
+  boa_gke_cluster2_master_cidr = "100.66.98.0/28"
   boa_gke_mci_master_cidr      = "100.64.134.0/28"
-  boa_gke_cluster1_pod_range   = "100.64.136.0/22"
-  boa_gke_cluster2_pod_range   = "100.65.128.0/22"
+  boa_gke_cluster1_pod_range   = "100.65.64.0/19"
+  boa_gke_cluster2_pod_range   = "100.66.64.0/19"
 }
