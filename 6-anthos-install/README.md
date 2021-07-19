@@ -535,7 +535,43 @@ Example:
     kubectl apply -n accounts --context ${CTX_2} -f ${HOME}/terraform-example-foundation-app/6-anthos-install/db-scripts/populate-accounts-db.yaml
     ```
 
-# Troubleshooting
+**NOTE: These steps should be executed before destroying the infrastructure:**
+```
+export GKE_PROJECT_ID=<YOUR-GKE-PROJECT-ID>
+```
+```
+gcloud container hub memberships unregister gke-1-boa-d-us-east1 \
+   --project=$GKE_PROJECT_ID \
+   --gke-cluster=us-east1/gke-1-boa-d-us-east1
+```
+```
+gcloud container hub memberships unregister gke-2-boa-d-us-west1 \
+   --project=$GKE_PROJECT_ID \
+   --gke-cluster=us-west1/gke-2-boa-d-us-west1
+```
+```
+gcloud container hub memberships unregister mci-boa-d-us-east1 \
+   --project=$GKE_PROJECT_ID \
+   --gke-cluster=us-east1/mci-boa-d-us-east1
+```
+```
+gcloud services disable anthos.googleapis.com --force --project=$GKE_PROJECT_ID
+```
+```
+gcloud alpha container hub ingress disable --force --project=$GKE_PROJECT_ID
+```
+```
+curl -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+    -X "DELETE" \
+    https://gkehub.googleapis.com/v1alpha1/projects/$GKE_PROJECT_ID/locations/global/features/authorizer
+```
+```
+curl -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+    -X "DELETE" \
+    https://gkehub.googleapis.com/v1alpha1/projects/$GKE_PROJECT_ID/locations/global/features/metering
+```
+
+## Troubleshooting
 
 1. If you get the error that you are unable to access git repository:
     ```
@@ -552,4 +588,4 @@ Example:
         gcloud auth print-access-token
         ```
 Use the credentials obtained to access git repositories.
->**NOTE: The token expires in around 30 minutes and it is necessary to generate a new one.**
+**NOTE: The token expires in around 30 minutes and it is necessary to generate a new one.**
